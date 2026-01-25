@@ -23,6 +23,8 @@ public class Livro {
     private @NotBlank @Column(unique = true) String isbn;
     @ManyToOne
     private @NotBlank Autor autor;
+    @ManyToOne
+    private @NotBlank Genero genero;
 
     @Deprecated
     public Livro() {
@@ -31,7 +33,7 @@ public class Livro {
 
     public Livro(@NotBlank @Size(max=100) String titulo, @NotBlank @Size(max = 50) String subTitulo,
                  @Min(15) BigDecimal preco, @NotBlank String conteudo, @NotBlank String sumario,
-                 @Min(30) int numeroPaginas, @NotBlank String isbn, Autor autor) {
+                 @Min(30) int numeroPaginas, @NotBlank String isbn, Autor autor, Genero genero) {
         this.titulo = titulo;
         this.subTitulo = subTitulo;
         this.preco = preco;
@@ -40,6 +42,7 @@ public class Livro {
         this.numeroPaginas = numeroPaginas;
         this.isbn = isbn;
         this.autor = autor;
+        this.genero = genero;
     }
 
 
@@ -78,5 +81,9 @@ public class Livro {
 
     public String getTitulo() {
         return titulo;
+    }
+
+    public Genero getGenero() {
+        return genero;
     }
 }

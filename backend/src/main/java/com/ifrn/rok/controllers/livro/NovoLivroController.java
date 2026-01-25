@@ -2,6 +2,7 @@ package com.ifrn.rok.controllers.livro;
 
 import com.ifrn.rok.models.Livro;
 import com.ifrn.rok.repository.AutorRepository;
+import com.ifrn.rok.repository.GeneroRepository;
 import com.ifrn.rok.repository.LivroRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.transaction.Transactional;
@@ -19,6 +20,8 @@ public class NovoLivroController {
     @Autowired
     AutorRepository autorRepository;
     @Autowired
+    GeneroRepository generoRepository;
+    @Autowired
     LivroRepository livroRepository;
 
     @PostMapping("/novolivro")
@@ -34,7 +37,7 @@ public class NovoLivroController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Livro com mesmo título deste autor já existe.");
         }
 
-        Livro livro = form.novoLivro(autorRepository);
+        Livro livro = form.novoLivro(autorRepository, generoRepository);
         livroRepository.save(livro);
 
     }

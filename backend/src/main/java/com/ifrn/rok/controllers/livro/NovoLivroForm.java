@@ -1,8 +1,10 @@
 package com.ifrn.rok.controllers.livro;
 
 import com.ifrn.rok.models.Autor;
+import com.ifrn.rok.models.Genero;
 import com.ifrn.rok.models.Livro;
 import com.ifrn.rok.repository.AutorRepository;
+import com.ifrn.rok.repository.GeneroRepository;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -30,6 +32,8 @@ public class NovoLivroForm {
     private String isbn;
     @NotNull
     private long autorId;
+    @NotNull
+    private long generoId;
 
     public String getSumario() {
         return sumario;
@@ -95,8 +99,17 @@ public class NovoLivroForm {
         this.conteudo = conteudo;
     }
 
-    public Livro novoLivro(AutorRepository autorRepository) {
+    public long getGeneroId() {
+        return generoId;
+    }
+
+    public void setGeneroId(long generoId) {
+        this.generoId = generoId;
+    }
+
+    public Livro novoLivro(AutorRepository autorRepository, GeneroRepository generoRepository) {
         Autor autor = autorRepository.findById(autorId).get();
-        return new Livro(titulo, subTitulo, preco, conteudo, sumario, numeroPaginas, isbn, autor);
+        Genero genero = generoRepository.findById(generoId).get();
+        return new Livro(titulo, subTitulo, preco, conteudo, sumario, numeroPaginas, isbn, autor, genero);
     }
 }
