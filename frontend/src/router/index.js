@@ -11,7 +11,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/novo-autor',
+    path: '/novo-autor', // mudar as rotas posteriormente para ficar /autor/novo, /genero/novo, etc.
     name: 'NovoAutor',
     component: NovoAutor
   },

@@ -5,7 +5,7 @@
     <header class="header">
       <div class="logo">
         <span>BIBLIOTECA </span>
-        <strong>RAÍZES</strong>
+        <strong>RAÍZES </strong>
         <strong>DO SABER</strong>
       </div>
 

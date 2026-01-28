@@ -38,23 +38,30 @@
 </template>
 
 <script>
+import { createNovoGenero } from '@/actions/novoGeneroActions';
+
 export default {
-  name: "AdicionarGenero",
+  name: 'NovoGenero',
   data() {
     return {
       genero: {
-        nome: "",
-        descricao: "",
-      },
+        nome: ''
+      }
     };
   },
   methods: {
-    salvarGenero() {
-      console.log("Gênero salvo:", this.genero);
-      alert("Gênero cadastrado com sucesso!");
-    },
-  },
-};
+    async submitForm() {
+      try {
+        await createNovoGenero(this.genero);
+        this.genero.nome = '';
+      } catch (error) {
+        console.error('Erro ao criar autor: ', error);
+        alert('Erro ao criar autor. Tente novamente.');
+      }
+    }
+  }
+}
+
 </script>
 
 <style scoped>
