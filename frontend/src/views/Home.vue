@@ -4,28 +4,33 @@
     <!-- HEADER -->
     <header class="header">
       <div class="logo">
-        <span>BIBLIOTECA </span>
-        <strong>RAÍZES </strong>
-        <strong>DO SABER</strong>
+        <span>BIBLIOTECA</span>
+        <strong>RAÍZES DO SABER</strong>
       </div>
-
     </header>
-
-    <!-- DECORATIVE STRIP -->
-    <div class="strip"></div>
 
     <!-- MAIN -->
     <main class="main">
       <section class="text">
         <span class="welcome">BEM-VINDO À</span>
-        <h1>BIBLIOTECA<br /> RAÍZES DO <br  /> SABER</h1>
-        <p>
-          Descubra o Nordeste, uma terra de cores vibrantes,
-          ritmos contagiantes e histórias de tirar o fôlego.
-        </p>
-        <button>Vamos lá!</button>
+        <h1>BIBLIOTECA<br />RAÍZES DO SABER</h1>
+        <p>Descubra o Nordeste, uma terra de cores vibrantes, ritmos contagiantes e histórias de tirar o fôlego.</p>
+
+        <!-- BOTÕES DE AÇÃO -->
+        <div class="buttons-section">
+          <div class="group">
+            <button class="boton" @click="navigateTo('/novo-livro')">Novo Livro</button>
+            <button class="boton" @click="navigateTo('/novo-autor')">Novo Autor</button>
+            <button class="boton" @click="navigateTo('/novo-genero')">Novo Gênero</button>
+          </div>
+
+          <div class="group">
+            <button class="boton" @click="navigateTo('/ver-genero')">Ver Gêneros</button>
+          </div>
+        </div>
       </section>
 
+      <!-- IMAGEM DIREITA -->
       <section class="image">
         <img src="/img/nordeste.png" alt="Ilustração Nordeste" />
       </section>
@@ -36,28 +41,32 @@
 
 <script>
 export default {
-  name: 'Home'
-}
+  name: "Home",
+  methods: {
+    redirectToNovoLivro() {
+      this.$router.push({ path: "/novo-livro" });
+    },
+    navigateTo(path) {
+      this.$router.push({ path });
+    },
+  },
+};
 </script>
 
 <style scoped>
 * {
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .home {
   background-color: #fff4e6;
-  color: #3a3a3a;
   min-height: 100vh;
 }
 
 /* HEADER */
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 24px 60px;
+  padding: 24px 50px;
   background: #fff1db;
 }
 
@@ -73,37 +82,19 @@ export default {
   color: #f97316;
 }
 
-.nav a {
-  margin-left: 32px;
-  text-decoration: none;
-  color: #555;
-  font-size: 14px;
-}
-
-/* STRIP */
-.strip {
-  height: 18px;
-  background: repeating-linear-gradient(
-    90deg,
-    #fcd34d,
-    #fcd34d 16px,
-    #fde68a 16px,
-    #fde68a 32px
-  );
-}
-
-/* MAIN */
+/* MAIN LAYOUT */
 .main {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 80px 60px;
-  gap: 60px;
+  height: calc(100vh - 120px);
 }
 
-/* TEXT */
+/* TEXT LEFT SIDE */
 .text {
-  max-width: 480px;
+  flex: 1;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .welcome {
@@ -113,32 +104,64 @@ export default {
 }
 
 .text h1 {
-  font-size: 52px;
+  font-size: 48px;
   color: #f97316;
-  line-height: 1.1;
-  margin: 16px 0;
+  margin: 10px 0;
 }
 
 .text p {
-  font-size: 15px;
-  line-height: 1.6;
-  margin-bottom: 24px;
-  color: #555;
+  font-size: 14px;
+  max-width: 400px;
 }
 
-.text button {
-  background: #f59e0b;
-  color: white;
+/* MAIN BUTTON */
+.boton-main {
+  margin-top: 20px;
+  padding: 12px 30px;
+  background: linear-gradient(135deg, #f97316, #f59e0b);
   border: none;
-  padding: 12px 28px;
-  border-radius: 999px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
   cursor: pointer;
   font-size: 14px;
 }
 
-/* IMAGE */
+/* ACTION BUTTONS */
+.buttons-section {
+  margin-top: 40px;
+}
+
+.group {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.boton {
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #f97316, #f59e0b);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100px;
+}
+
+/* IMAGE RIGHT SIDE */
+.image {
+  flex: 1;
+  background: linear-gradient(135deg, #f97316, #f59e0b);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .image img {
-  max-width: 520px;
-  border-radius: 24px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>
