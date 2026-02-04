@@ -9,7 +9,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -27,16 +27,11 @@ public class NovoLivroController {
     @PostMapping("/novolivro")
     @Transactional
     @Operation(summary = "Novo livro")
-    public void novoLivro(@ModelAttribute @Valid NovoLivroForm form) {
+    public void novoLivro(@RequestBody @Valid NovoLivroForm form) {
         boolean livroComMesmoIsbn = livroRepository.findByIsbn(form.getIsbn()).isPresent();
-        boolean livroComMesmoTituloeAutor = livroRepository.findByTitulo(form.getTitulo()).isPresent() && livroRepository.findByAutorId(form.getAutorId()).isPresent();
         if (livroComMesmoIsbn) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Livro com mesmo ISBN já existe.");
         }
-        if (livroComMesmoTituloeAutor) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Livro com mesmo título deste autor já existe.");
-        }
-
         Livro livro = form.novoLivro(autorRepository, generoRepository);
         livroRepository.save(livro);
 

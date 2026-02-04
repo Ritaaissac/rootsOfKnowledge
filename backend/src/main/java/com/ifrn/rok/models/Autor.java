@@ -39,4 +39,8 @@ public class Autor {
     public URL getPortfolioAutor() {
         return portfolioAutor;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

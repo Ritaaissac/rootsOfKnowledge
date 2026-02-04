@@ -26,4 +26,8 @@ public class Genero {
     public String getNome() {
         return nome;
     }
+
+    public Long getId() {
+        return id;
+    }
 }
